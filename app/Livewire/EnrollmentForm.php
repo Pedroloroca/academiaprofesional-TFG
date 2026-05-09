@@ -39,6 +39,10 @@ class EnrollmentForm extends Component
             return;
         }
 
+        if ($this->course->price > 0) {
+            return redirect()->route('checkout.show', $this->course->slug);
+        }
+
         $student->courses()->attach($this->course->id, [
             'status' => 'active',
             'enrolled_at' => now(),

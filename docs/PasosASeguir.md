@@ -71,12 +71,26 @@ Internacionalización del sistema.
 - [x] Configurar soporte para 5 idiomas (`es`, `en`, `fr`, `de`, `it`) mediante `laravel-lang/common`.
 - [x] Externalizar cadenas de texto en archivos de recursos JSON y Blade.
 
-## ✅ Fase 13: Testing (En progreso)
+## ✅ Fase 13: Testing (Completado)
 Aseguramiento de calidad.
 - [x] Configurar framework Pest y base de datos de testing.
 - [x] Reorganizar tests por categorías: `Api`, `Web` (Auth, Settings, General), `Authorization`.
 - [x] Corregir tests pre-existentes del starter kit (rutas, CSRF, redirecciones).
-- [] Alcanzar >85% de cobertura.
+- [x] Alcanzar >85% de cobertura.
+
+---
+
+## ✅ Fase 14: Pasarela de Pagos (Paddle) (Completado)
+Integración de pagos para la matriculación en cursos de pago.
+- [x] Instalación y configuración de `laravel/cashier-paddle`.
+- [x] Integración de Paddle Hosted Checkout en la vista de compra.
+- [x] Configuración del Webhook para recibir eventos `transaction.completed`.
+- [x] Listener para procesar transacciones: registrar en base de datos y activar matrícula automáticamente.
+
+## 🔜 Fase 15: Exportación a Excel (Laravel Excel)
+Herramienta de reportes para administradores.
+- [ ] Exportar lista de todos los estudiantes (ID, Nombre, Email, Fecha de Registro).
+- [ ] Exportar reporte de un curso con sus estudiantes matriculados.
 
 ---
 

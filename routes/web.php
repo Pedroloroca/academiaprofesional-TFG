@@ -53,6 +53,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/admin/students', StudentManager::class)->name('admin.students');
     Route::get('/cursos/{slug}/enroll', EnrollmentForm::class)->name('courses.enroll');
     Route::get('/cursos/{slug}', LessonViewer::class)->name('courses.show');
+    
+    // Paddle Checkout Routes
+    Route::get('/checkout/{course:slug}', [\App\Http\Controllers\CheckoutController::class, 'show'])->name('checkout.show');
+    Route::get('/checkout/success/{course:slug}', [\App\Http\Controllers\CheckoutController::class, 'success'])->name('checkout.success');
 
     // PDF Generation Routes
     Route::get('/pdf/welcome/{user}', [\App\Http\Controllers\Web\PdfController::class, 'welcome'])->name('pdf.welcome');

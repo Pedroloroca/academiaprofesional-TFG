@@ -12,6 +12,7 @@
 
     @vite(['resources/js/app.ts'])
     @livewireStyles
+    @paddleJS
 </head>
 <body class="font-sans antialiased bg-gray-50 text-gray-900 select-none">
     <div class="min-h-screen flex flex-col justify-between">

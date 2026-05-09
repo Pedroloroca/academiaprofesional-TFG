@@ -37,7 +37,8 @@ test('enrollment form acts correctly', function () {
     $course = Course::factory()->create([
         'teacher_id' => $teacher->id,
         'status' => 'published',
-        'slug' => 'enroll-test-course-slug'
+        'slug' => 'enroll-test-course-slug',
+        'price' => 0,
     ]);
 
     Livewire::actingAs($user)

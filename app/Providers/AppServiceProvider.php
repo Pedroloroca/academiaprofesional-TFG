@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Event;
+use Laravel\Paddle\Events\TransactionCompleted;
+use App\Listeners\HandlePaddleTransactionCompleted;
+use Laravel\Paddle\Events\WebhookReceived;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,6 +34,15 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->configureDefaults();
         $this->registerPolicies();
+
+        Event::listen(
+            TransactionCompleted::class,
+            HandlePaddleTransactionCompleted::class,
+        );
+
+        Event::listen(function (WebhookReceived $event) {
+            \Illuminate\Support\Facades\Log::info('Paddle Webhook Received: ' . $event->payload['event_type'], $event->payload);
+        });
     }
 
     protected function registerPolicies(): void

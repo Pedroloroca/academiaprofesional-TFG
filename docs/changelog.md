@@ -175,4 +175,14 @@ Migración total del frontend de Vue a Blade Auth, eliminación de Inertia, crea
 - **Traducción Integral de Vistas**: Corrección de las vistas de Autenticación (`login`, `register`), Gestión de Cursos (`course-manager`) y Gestión de Estudiantes (`student-manager`) mediante el uso del helper `__()` y asignación de claves y valores en el archivo de traducción en inglés (`en.json`).
 - **Tests**: Pruebas automáticas de localización en Pest desarrolladas satisfactoriamente.
 
+---
 
+## [Fase 14] Integración de Pasarela de Pago (Paddle) - *Completado*
+**Fecha:** 9 de Mayo de 2026
+
+### Cambios Realizados:
+- **Laravel Cashier Paddle**: Instalación e integración del paquete oficial para gestionar clientes y cobros con Paddle Billing.
+- **Checkout Dinámico**: Creación de un flujo de compra para los cursos de pago usando `<x-paddle-checkout>` incrustado en la página, redirigiendo automáticamente si el curso cuesta más de 0.
+- **Webhooks y Eventos**:
+    - Listener `HandlePaddleTransactionCompleted` para procesar de fondo las confirmaciones de pago.
+    - Activación de matrícula automática (`active`), creación de registro en la tabla `payments` y desencadenamiento de emails automáticos con la factura en PDF.
