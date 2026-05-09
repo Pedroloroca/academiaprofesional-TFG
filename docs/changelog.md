@@ -186,3 +186,18 @@ Migración total del frontend de Vue a Blade Auth, eliminación de Inertia, crea
 - **Webhooks y Eventos**:
     - Listener `HandlePaddleTransactionCompleted` para procesar de fondo las confirmaciones de pago.
     - Activación de matrícula automática (`active`), creación de registro en la tabla `payments` y desencadenamiento de emails automáticos con la factura en PDF.
+
+---
+
+## [Fase 15] Exportación a Excel (CSV Nativo) - *Completado*
+**Fecha:** 9 de Mayo de 2026
+
+### Cambios Realizados:
+- **Método Genérico Reutilizable**: Implementación en `ExportController` de una lógica capaz de convertir cualquier Array o Collection en un archivo CSV descargable, auto-detectando cabeceras.
+- **Optimización de Memoria**: Uso de `StreamedResponse` y `fputcsv` nativo para permitir exportaciones masivas con consumo mínimo de recursos.
+- **Compatibilidad con Excel**: Forzada codificación `UTF-8 con BOM` y delimitador `;` para asegurar apertura correcta en Excel (España/Windows).
+- **Reportes Específicos**:
+    - **Administrador**: Exportación de todos los alumnos y todos los cursos.
+    - **Profesor**: Exportación de alumnos matriculados por curso individual.
+    - **Estudiante**: Exportación de su propio historial de cursos matriculados.
+- **Interfaz**: Botones de exportación integrados dinámicamente en los componentes Livewire de Gestión de Estudiantes y Cursos.

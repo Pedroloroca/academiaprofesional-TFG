@@ -5,9 +5,14 @@
             <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">{{ __('Gestión de Estudiantes') }}</h2>
             <p class="text-sm text-gray-500 mt-1">{{ __('Administra el padrón de alumnos de la academia profesional.') }}</p>
         </div>
-        <button wire:click="create()" class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-xl shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
-            <span>➕</span> {{ __('Añadir Estudiante') }}
-        </button>
+        <div class="flex items-center gap-3">
+            <a href="{{ route('export.students') }}" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-xl shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
+                <span>📊</span> {{ __('Exportar CSV') }}
+            </a>
+            <button wire:click="create()" class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-xl shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
+                <span>➕</span> {{ __('Añadir Estudiante') }}
+            </button>
+        </div>
     </div>
 
     <!-- Alert Message -->

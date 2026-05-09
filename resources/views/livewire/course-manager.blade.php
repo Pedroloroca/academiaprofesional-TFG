@@ -13,11 +13,24 @@
                 <p class="text-sm text-gray-500 mt-1">{{ __('Accede a tus cursos matriculados y sigue aprendiendo.') }}</p>
             @endif
         </div>
-        @if(!$isStudent)
-        <button wire:click="create()" class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-xl shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
-            <span>➕</span> {{ __('Crear Nuevo Curso') }}
-        </button>
-        @endif
+        <div class="flex flex-wrap items-center gap-3">
+            @if($isAdminOrManager)
+                <a href="{{ route('export.courses') }}" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-xl shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
+                    <span>📊</span> {{ __('Exportar CSV (Todos)') }}
+                </a>
+                <button wire:click="create()" class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-xl shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
+                    <span>➕</span> {{ __('Crear Nuevo Curso') }}
+                </button>
+            @elseif($isTeacher)
+                <button wire:click="create()" class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-xl shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
+                    <span>➕</span> {{ __('Crear Nuevo Curso') }}
+                </button>
+            @elseif($isStudent)
+                <a href="{{ route('export.my-courses') }}" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-xl shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
+                    <span>📊</span> {{ __('Exportar Mis Cursos') }}
+                </a>
+            @endif
+        </div>
     </div>
 
     <!-- Alert Message -->
@@ -81,6 +94,9 @@
                                 📖 {{ __('Ver contenido') }}
                             </a>
                             @elseif($isTeacher)
+                            <a href="{{ route('export.course.students', $course->id) }}" class="text-emerald-600 hover:text-emerald-800 mr-4 inline-flex items-center gap-1 transition-colors" title="Exportar Alumnos">
+                                📊 {{ __('Exportar Alumnos') }}
+                            </a>
                             <a href="/cursos/{{ $course->slug }}" class="text-indigo-600 hover:text-indigo-800 mr-4 inline-flex items-center gap-1 transition-colors">
                                 ✏ {{ __('Gestionar / Ver contenido') }}
                             </a>
@@ -88,6 +104,9 @@
                                 🗑 {{ __('Eliminar') }}
                             </button>
                             @else
+                            <a href="{{ route('export.course.students', $course->id) }}" class="text-emerald-600 hover:text-emerald-800 mr-4 inline-flex items-center gap-1 transition-colors" title="Exportar Alumnos">
+                                📊 {{ __('Exportar Alumnos') }}
+                            </a>
                             <button wire:click="edit({{ $course->id }})" class="text-indigo-600 hover:text-indigo-800 mr-4 inline-flex items-center gap-1 transition-colors">
                                 ✏ {{ __('Editar') }}
                             </button>

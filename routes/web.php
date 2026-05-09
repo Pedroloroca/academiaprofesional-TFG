@@ -58,6 +58,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/checkout/{course:slug}', [\App\Http\Controllers\CheckoutController::class, 'show'])->name('checkout.show');
     Route::get('/checkout/success/{course:slug}', [\App\Http\Controllers\CheckoutController::class, 'success'])->name('checkout.success');
 
+    // Excel Export Routes (CSV)
+    Route::get('/export/students', [\App\Http\Controllers\ExportController::class, 'exportAllStudents'])->name('export.students');
+    Route::get('/export/courses', [\App\Http\Controllers\ExportController::class, 'exportAllCourses'])->name('export.courses');
+    Route::get('/export/courses/{course}/students', [\App\Http\Controllers\ExportController::class, 'exportCourseStudents'])->name('export.course.students');
+    Route::get('/export/my-courses', [\App\Http\Controllers\ExportController::class, 'exportMyCourses'])->name('export.my-courses');
+
     // PDF Generation Routes
     Route::get('/pdf/welcome/{user}', [\App\Http\Controllers\Web\PdfController::class, 'welcome'])->name('pdf.welcome');
     Route::get('/pdf/invoice/{enrollment}', [\App\Http\Controllers\Web\PdfController::class, 'invoice'])->name('pdf.invoice');

@@ -51,22 +51,22 @@ Automatización de flujos de trabajo.
 - [x] Crear Listeners (`SendWelcomeEmail`, etc.).
 - [x] Implementar 5 Jobs (3 en cola, 2 síncronos).
 
-## ✅ Fase 9: Comandos de Consola
+## ✅ Fase 9: Comandos de Consola (Completado)
 Herramientas de mantenimiento y automatización interna.
 - [x] Crear 7 comandos Artisan personalizados.
 - [x] Implementar invocación interna de comandos desde código.
 
-## ✅ Fase 10: Emails y Notificaciones
+## ✅ Fase 10: Emails y Notificaciones (Completado)
 Comunicación con los usuarios.
 - [x] Crear 4 clases Mailables (Bienvenida, Factura, etc.).
 - [x] Configurar plantillas Blade para emails.
 
-## ✅ Fase 11: Generación de PDF
+## ✅ Fase 11: Generación de PDF (Completado)
 Documentos digitales.
 - [x] Instalar `laravel-dompdf`.
 - [x] Generar 5 tipos de reportes PDF (Carta de Bienvenida, Factura, Certificado, Catálogo, Reporte Profesor).
 
-## ✅ Fase 12: Traducciones
+## ✅ Fase 12: Traducciones (Completado)
 Internacionalización del sistema.
 - [x] Configurar soporte para 5 idiomas (`es`, `en`, `fr`, `de`, `it`) mediante `laravel-lang/common`.
 - [x] Externalizar cadenas de texto en archivos de recursos JSON y Blade.
@@ -87,10 +87,12 @@ Integración de pagos para la matriculación en cursos de pago.
 - [x] Configuración del Webhook para recibir eventos `transaction.completed`.
 - [x] Listener para procesar transacciones: registrar en base de datos y activar matrícula automáticamente.
 
-## 🔜 Fase 15: Exportación a Excel (Laravel Excel)
+## ✅ Fase 15: Exportación a Excel (CSV Nativo) (Completado)
 Herramienta de reportes para administradores.
-- [ ] Exportar lista de todos los estudiantes (ID, Nombre, Email, Fecha de Registro).
-- [ ] Exportar reporte de un curso con sus estudiantes matriculados.
+- [x] Crear un método genérico y reutilizable para exportación a CSV (Excel).
+- [x] Implementar exportaciones personalizadas para Administradores (Estudiantes y Cursos).
+- [x] Implementar exportación para Profesores (Alumnos por curso).
+- [x] Implementar exportación para Estudiantes (Sus cursos matriculados).
 
 ---
 
