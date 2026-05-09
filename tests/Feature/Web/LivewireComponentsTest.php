@@ -140,3 +140,12 @@ test('student manager component edit and delete actions work', function () {
     ]);
 });
 
+test('course manager validates required fields', function () {
+    $user = User::where('email', 'admin@admin.com')->first();
+
+    Livewire::actingAs($user)
+        ->test(CourseManager::class)
+        ->call('store')
+        ->assertHasErrors(['title', 'description', 'price', 'teacher_id']);
+});
+
