@@ -78,3 +78,13 @@ test('MonthlySummary mailable builds correctly', function () {
     $mailable->assertSeeInHtml('Pedro');
     $mailable->assertHasSubject('Resumen Mensual de Actividad');
 });
+
+test('TeacherAssignment mailable builds correctly', function () {
+    $teacherUser = User::factory()->create(['name' => 'Profesor Prueba']);
+    $course = Course::factory()->create(['title' => 'Curso de Prueba']);
+
+    $mailable = new \App\Mail\TeacherAssignment($teacherUser, $course);
+    $mailable->assertSeeInHtml('Profesor Prueba');
+    $mailable->assertSeeInHtml('Curso de Prueba');
+    $mailable->assertHasSubject('Nueva Asignación de Curso');
+});

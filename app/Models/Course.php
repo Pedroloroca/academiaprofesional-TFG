@@ -50,4 +50,14 @@ class Course extends Model implements HasMedia
             $q->where('status', 'active');
         });
     }
+
+    public function scopeClassroom($query)
+    {
+        return $query->where('is_classroom', true);
+    }
+
+    public function scopeWithManyLessons($query, int $count = 5)
+    {
+        return $query->has('lessons', '>=', $count);
+    }
 }

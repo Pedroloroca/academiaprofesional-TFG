@@ -17,4 +17,9 @@ class Lesson extends Model implements HasMedia
     {
         return $this->belongsTo(Course::class);
     }
+
+    public function scopePublished($query)
+    {
+        return $query->where('is_published', true);
+    }
 }
