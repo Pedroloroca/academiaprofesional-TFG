@@ -4,6 +4,7 @@ use App\Models\User;
 use App\Models\Course;
 use App\Models\Student;
 use Illuminate\Support\Facades\Http;
+use Laravel\Paddle\Cashier;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
@@ -17,15 +18,24 @@ beforeEach(function () {
 
 test('checkout page shows redirect button to paddle', function () {
     // Mock Paddle API response
-    Http::fake([
-        'sandbox-api.paddle.com/transactions' => Http::response([
+    Cashier::fake([
+        'customers*' => [
+            'data' => [
+                [
+                    'id' => 'ctm_123',
+                    'email' => 'test@example.com',
+                    'name' => 'Test User'
+                ]
+            ]
+        ],
+        'transactions*' => [
             'data' => [
                 'id' => 'txn_123',
                 'checkout' => [
                     'url' => 'https://checkout.paddle.com/test'
                 ]
             ]
-        ], 200),
+        ],
     ]);
 
     $this->actingAs($this->user)

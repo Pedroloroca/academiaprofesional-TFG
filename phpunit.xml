@@ -31,5 +31,8 @@
         <env name="PULSE_ENABLED" value="false"/>
         <env name="TELESCOPE_ENABLED" value="false"/>
         <env name="NIGHTWATCH_ENABLED" value="false"/>
+        <env name="PADDLE_API_KEY" value="test_api_key"/>
+        <env name="PADDLE_CLIENT_TOKEN" value="test_client_token"/>
+        <env name="PADDLE_ENV" value="sandbox"/>
     </php>
 </phpunit>
