@@ -26,6 +26,16 @@
         </div>
     @endif
 
+    <!-- Search and Filter Bar -->
+    <div class="flex flex-col sm:flex-row items-center gap-4 mb-6">
+        <div class="w-full relative">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400 text-lg select-none">
+                🔍
+            </span>
+            <x-ui.input type="text" wire:model.live="search" placeholder="Buscar estudiante por nombre o correo electrónico..." class="w-full pl-10 rounded-xl border-gray-200 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm" />
+        </div>
+    </div>
+
     <!-- Premium Table Container -->
     <div class="bg-white rounded-2xl border border-gray-100 shadow-xl overflow-hidden mb-12">
         <div class="overflow-x-auto">

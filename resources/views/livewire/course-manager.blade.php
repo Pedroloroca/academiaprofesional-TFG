@@ -51,6 +51,24 @@
         </div>
     @endif
 
+    <!-- Search and Filter Bar -->
+    <div class="flex flex-col sm:flex-row items-center gap-4 mb-6">
+        <div class="w-full sm:w-2/3 relative">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400 text-lg select-none">
+                🔍
+            </span>
+            <x-ui.input type="text" wire:model.live="search" placeholder="Buscar curso por título..." class="w-full pl-10 rounded-xl border-gray-200 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm" />
+        </div>
+        <div class="w-full sm:w-1/3">
+            <x-ui.select wire:model.live="filterStatus" class="w-full rounded-xl border-gray-200 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm">
+                <option value="">Todos los estados</option>
+                <option value="published">Publicados</option>
+                <option value="draft">Borradores</option>
+                <option value="archived">Archivados</option>
+            </x-ui.select>
+        </div>
+    </div>
+
     <!-- Premium Table Container -->
     <div class="bg-white rounded-2xl border border-gray-100 shadow-xl overflow-hidden mb-12">
         <div class="overflow-x-auto">
@@ -64,8 +82,16 @@
                             class="px-6 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">
                             {{ __('Profesor') }}</th>
                         <th scope="col"
-                            class="px-6 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">
-                            {{ __('Precio') }}</th>
+                            class="px-6 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors select-none" wire:click="sortBy('price')">
+                            <div class="flex items-center gap-1">
+                                {{ __('Precio') }}
+                                @if($sortField === 'price')
+                                    <span class="text-indigo-600">{{ $sortDirection === 'asc' ? '↑' : '↓' }}</span>
+                                @else
+                                    <span class="text-gray-300">↕</span>
+                                @endif
+                            </div>
+                        </th>
                         <th scope="col"
                             class="px-6 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">
                             {{ __('Ámbito') }}</th>

@@ -145,6 +145,21 @@ class CourseManager extends Component
         session()->flash('message', 'Course Deleted Permanently.');
     }
 
+    public $search = '';
+    public $sortField = '';
+    public $sortDirection = 'asc';
+    public $filterStatus = '';
+
+    public function sortBy($field)
+    {
+        if ($this->sortField === $field) {
+            $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
+        } else {
+            $this->sortField = $field;
+            $this->sortDirection = 'asc';
+        }
+    }
+
     public function render()
     {
         $user = auth()->user();
@@ -160,20 +175,54 @@ class CourseManager extends Component
             $isTeacher = $user->hasRole('teacher');
             $isStudent = $user->hasRole('student');
 
+            $query = Course::query();
+            $canView = false;
+
             if ($isAdminOrManager) {
-                $courses = Course::with('teacher.user')->get();
-                $deletedCourses = Course::onlyTrashed()->with('teacher.user')->get();
+                $canView = true;
             } elseif ($isTeacher) {
                 $teacher = \App\Models\Teacher::where('user_id', $user->id)->first();
                 if ($teacher) {
-                    $courses = Course::where('teacher_id', $teacher->id)->with('teacher.user')->get();
+                    $query->where('teacher_id', $teacher->id);
+                    $canView = true;
                 }
             } elseif ($isStudent) {
                 $student = \App\Models\Student::where('user_id', $user->id)->first();
                 if ($student) {
-                    $courses = Course::whereHas('enrollments', function($q) use ($student) {
+                    $query->whereHas('enrollments', function($q) use ($student) {
                         $q->where('student_id', $student->id);
-                    })->with('teacher.user')->get();
+                    });
+                    $canView = true;
+                }
+            }
+
+            if ($canView) {
+                if (!empty($this->search)) {
+                    $query->where('title', 'like', '%' . $this->search . '%');
+                }
+
+                if (!empty($this->filterStatus)) {
+                    $query->where('status', $this->filterStatus);
+                }
+
+                if (!empty($this->sortField)) {
+                    $query->orderBy($this->sortField, $this->sortDirection);
+                }
+
+                $courses = $query->with('teacher.user')->get();
+
+                if ($isAdminOrManager) {
+                    $deletedQuery = Course::onlyTrashed();
+                    if (!empty($this->search)) {
+                        $deletedQuery->where('title', 'like', '%' . $this->search . '%');
+                    }
+                    if (!empty($this->filterStatus)) {
+                        $deletedQuery->where('status', $this->filterStatus);
+                    }
+                    if (!empty($this->sortField)) {
+                        $deletedQuery->orderBy($this->sortField, $this->sortDirection);
+                    }
+                    $deletedCourses = $deletedQuery->with('teacher.user')->get();
                 }
             }
         }

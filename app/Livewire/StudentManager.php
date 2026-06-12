@@ -113,10 +113,21 @@ class StudentManager extends Component
         session()->flash('message', 'Estudiante eliminado.');
     }
 
+    public $search = '';
+
     public function render()
     {
+        $query = Student::query();
+
+        if (!empty($this->search)) {
+            $query->whereHas('user', function($q) {
+                $q->where('name', 'like', '%' . $this->search . '%')
+                  ->orWhere('email', 'like', '%' . $this->search . '%');
+            });
+        }
+
         return view('livewire.student-manager', [
-            'students' => Student::with('user')->get(),
+            'students' => $query->with('user')->get(),
         ])->layout('layouts.livewire');
     }
 }
