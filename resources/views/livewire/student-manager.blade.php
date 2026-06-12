@@ -65,7 +65,10 @@
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             📅 {{ $student->date_of_birth ? $student->date_of_birth->format('d/m/Y') : 'N/A' }}
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold flex items-center">
+                            <a href="{{ route('pdf.welcome', $student->user->id) }}" target="_blank" class="inline-flex items-center gap-1.5 bg-red-600 hover:bg-red-700 text-white text-xs font-bold py-1.5 px-3 rounded-lg shadow-sm transition-all mr-3">
+                                📄 {{ __('Carta Bienvenida') }}
+                            </a>
                             <button wire:click="edit({{ $student->id }})" class="text-indigo-600 hover:text-indigo-800 mr-4 inline-flex items-center gap-1 transition-colors">
                                 ✏ {{ __('Editar') }}
                             </button>

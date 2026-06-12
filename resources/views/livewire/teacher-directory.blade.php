@@ -22,13 +22,16 @@
                 <p class="text-gray-500 text-sm mt-3 mb-4 leading-relaxed line-clamp-3">
                     {{ $teacher->bio ?: __('Profesor e Instructor experto de nuestra academia profesional.') }}
                 </p>
-                @if($teacher->website_url)
-                <div class="pt-4 border-t border-gray-50 mt-auto">
+                <div class="pt-4 border-t border-gray-50 mt-auto flex flex-col gap-2">
+                    @if($teacher->website_url)
                     <a href="{{ $teacher->website_url }}" target="_blank" class="inline-flex items-center gap-1.5 text-indigo-600 hover:text-indigo-500 text-sm font-bold tracking-wide transition-colors">
                         🌐 {{ __('Ver Sitio Web') }} &rarr;
                     </a>
+                    @endif
+                    <a href="{{ route('pdf.teacher-report', $teacher->id) }}" target="_blank" class="inline-flex items-center justify-center gap-1.5 bg-red-600 hover:bg-red-700 text-white text-xs font-bold py-2 px-3 rounded-lg shadow-sm transition-all mt-1">
+                        📄 {{ __('Descargar Reporte del Profesor') }}
+                    </a>
                 </div>
-                @endif
             </div>
             @endforeach
         </div>

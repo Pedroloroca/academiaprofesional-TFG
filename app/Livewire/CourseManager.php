@@ -209,7 +209,13 @@ class CourseManager extends Component
                     $query->orderBy($this->sortField, $this->sortDirection);
                 }
 
-                $courses = $query->with('teacher.user')->get();
+                if ($isStudent && isset($student)) {
+                    $courses = $query->with(['teacher.user', 'enrollments' => function($q) use ($student) {
+                        $q->where('student_id', $student->id);
+                    }])->get();
+                } else {
+                    $courses = $query->with('teacher.user')->get();
+                }
 
                 if ($isAdminOrManager) {
                     $deletedQuery = Course::onlyTrashed();

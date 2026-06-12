@@ -17,6 +17,10 @@
         </div>
         <div class="flex flex-wrap items-center gap-3">
             @if($isAdminOrManager)
+                <a href="{{ route('pdf.course-catalog') }}" target="_blank"
+                    class="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-xl shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
+                    <span>📄</span> {{ __('Catálogo PDF') }}
+                </a>
                 <a href="{{ route('export.courses') }}"
                     class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-xl shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
                     <span>📊</span> {{ __('Exportar CSV (Todos)') }}
@@ -141,6 +145,16 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold">
                                 @if($isStudent)
+                                    @if($course->enrollments && $course->enrollments->isNotEmpty())
+                                        <a href="{{ route('pdf.invoice', $course->enrollments->first()->id) }}" target="_blank"
+                                            class="inline-flex items-center gap-1.5 bg-red-600 hover:bg-red-700 text-white text-xs font-bold py-1.5 px-3 rounded-lg shadow-sm transition-all mr-2">
+                                            📄 {{ __('Factura') }}
+                                        </a>
+                                        <a href="{{ route('pdf.certificate', $course->enrollments->first()->id) }}" target="_blank"
+                                            class="inline-flex items-center gap-1.5 bg-red-600 hover:bg-red-700 text-white text-xs font-bold py-1.5 px-3 rounded-lg shadow-sm transition-all mr-2">
+                                            🎓 {{ __('Certificado') }}
+                                        </a>
+                                    @endif
                                     <a href="/cursos/{{ $course->slug }}"
                                         class="text-indigo-600 hover:text-indigo-800 mr-4 inline-flex items-center gap-1 transition-colors">
                                         📖 {{ __('Ver contenido') }}
