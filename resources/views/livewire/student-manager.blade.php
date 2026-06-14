@@ -92,7 +92,7 @@
 
             <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
-            <div class="inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border border-gray-100">
+            <div class="relative z-10 inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border border-gray-100">
                 <form wire:submit.prevent="store">
                     <div class="bg-white px-6 pt-6 pb-4 sm:p-8 sm:pb-6">
                         <div class="flex justify-between items-center mb-6 border-b pb-4">

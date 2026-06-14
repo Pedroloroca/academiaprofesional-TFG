@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memoria TFG - Academia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        body {
+            background: white;
+            font-family: 'Inter', sans-serif;
+            color: #374151;
+            margin: 0;
+            padding: 20px 0;
+        }
+
+        .a4-page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 25mm;
+            margin: 0 auto 20mm auto;
+            background: white;
+            box-shadow: none;
+            box-sizing: border-box;
+            overflow: hidden;
+            page-break-after: always;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+            }
+
+            .a4-page {
+                width: 210mm;
+                min-height: 297mm;
+                padding: 25mm;
+                margin: 0 auto 20mm auto;
+                background: white;
+                box-shadow: none;
+                box-sizing: border-box;
+                overflow: hidden;
+                page-break-after: always;
+            }
+
+            .no-print {
+                display: none;
+            }
+        }
+
+        .screenshot-placeholder {
+            width: 100%;
+            min-height: 350px;
+            background: #f3f4f6;
+            border: 2px dashed #9ca3af;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+            font-weight: 500;
+            margin: 30px 0;
+            border-radius: 8px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: #1e1b4b;
+            margin-bottom: 1.5rem;
+            margin-top: 2.5rem;
+            border-bottom: 3px solid #4f46e5;
+            padding-bottom: 0.5rem;
+            letter-spacing: -0.025em;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #312e81;
+            margin-bottom: 1.25rem;
+            margin-top: 2.25rem;
+            border-left: 5px solid #4f46e5;
+            padding-left: 0.75rem;
+            letter-spacing: -0.015em;
+        }
+
+        h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #4f46e5;
+            margin-bottom: 1rem;
+            margin-top: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        p {
+            line-height: 1.7;
+            margin-bottom: 1.25rem;
+            text-align: justify;
+            font-size: 11pt;
+        }
+
+        ul {
+            list-style-type: disc;
+            margin-left: 2rem;
+            margin-bottom: 1.25rem;
+            font-size: 11pt;
+            line-height: 1.7;
+        }
+
+        ol {
+            list-style-type: decimal;
+            margin-left: 2rem;
+            margin-bottom: 1.25rem;
+            font-size: 11pt;
+            line-height: 1.7;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .table-custom {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            font-size: 10pt;
+        }
+
+        .table-custom th {
+            background-color: #f3f4f6;
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #d1d5db;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .table-custom td {
+            padding: 12px;
+            border: 1px solid #d1d5db;
+        }
+
+        .table-custom tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+
+        /* Portada styles */
+        .cover-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ffffff;
+            background-image:
+                radial-gradient(circle at 100% 0%, #f3e8ff 0%, transparent 40%),
+                radial-gradient(circle at 0% 100%, #faf5ff 0%, transparent 30%);
+            z-index: 0;
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .cover-logo-box {
+            width: 120px;
+            height: 120px;
+            background: #4f46e5;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            box-shadow: 0 20px 25px -5px rgba(79, 70, 229, 0.4);
+        }
+
+        .cover-logo-text {
+            color: white;
+            font-size: 80px;
+            font-weight: 900;
+            font-family: 'Inter', sans-serif;
+            line-height: 1;
+        }
+
+        .break-inside-avoid {
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+
+        .break-inside-avoid {
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+    </style>
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+</head>
+
+<body>
+
+    <div class="a4-page relative">
+        <div class="cover-bg"></div>
+        <div class="cover-content">
+            <div class="text-center pt-16">
+                <div class="cover-logo-box">
+                    <span class="cover-logo-text">A</span>
+                </div>
+                <h1 style="border: none; font-size: 3.5rem; margin-bottom: 0.5rem; text-align: center;"
+                    class="text-gray-900 tracking-tight">Academiaprofesional</h1>
+                <p style="text-align: center;" class="text-2xl text-gray-500 font-light mt-0">Plataforma web de
+                    formación y gestión educativa</p>
+            </div>
+
+            <div class="text-center mt-24">
+                <h2 style="font-size: 2rem; color: #4f46e5; border: none; margin-bottom: 0;">Memoria de Proyecto</h2>
+                <p style="text-align: center;" class="text-xl text-gray-600 mt-2">Trabajo de Fin de Grado (TFG)</p>
+                <p style="text-align: center;" class="text-lg text-gray-500 mt-2">Desarrollo de Aplicaciones Web</p>
+            </div>
+
+            <div class="mt-24 pb-16 flex justify-center">
+                <div class="bg-white/80 backdrop-blur-sm p-6 rounded-xl border border-gray-200 shadow-sm text-left">
+                    <p style="text-align: left;"
+                        class="text-sm text-gray-500 uppercase tracking-wider mb-3 font-semibold">Autores</p>
+                    <ul class="list-none m-0 p-0 text-lg font-semibold text-gray-800 space-y-2">
+                        <li class="flex items-center"><span class="w-2 h-2 rounded-full bg-blue-600 mr-3"></span>Pedro
+                            Ruipérez Carrasco</li>
+                        <li class="flex items-center"><span class="w-2 h-2 rounded-full bg-blue-600 mr-3"></span>Daniel
+                            Tortosa Burtseva</li>
+                        <li class="flex items-center"><span class="w-2 h-2 rounded-full bg-blue-600 mr-3"></span>Asier
+                            Estévez Blanco</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="a4-page">
+        <br>
+        <h1>ÍNDICE</h1>
+        <br>
+        <div class="mb-12 bg-white p-8 rounded-xl border border-gray-200 shadow-sm">
+            <ol class="list-decimal list-inside space-y-3 text-gray-700 font-medium">
+                <li>Presentación del Proyecto
+                    <ol class="list-[lower-alpha] list-inside ml-6 mt-2 space-y-1 text-gray-600">
+                        <li>Contexto y motivación inicial</li>
+                        <li>Audiencia objetivo</li>
+                        <li>Metas funcionales y de diseño</li>
+                    </ol>
+                </li>
+                <li>Planificación y cronograma</li>
+                <li>Problemática actual y solución aportada</li>
+                <li>Flujo de navegación y estructura general</li>
+                <li>Módulos y características principales
+                    <ol class="list-[lower-alpha] list-inside ml-6 mt-2 space-y-1 text-gray-600">
+                        <li>Perfil de Alumno</li>
+                        <li>Perfil de Docente</li>
+                        <li>Panel de Gestión y Control</li>
+                    </ol>
+                </li>
+                <li>Stack Tecnológico
+                    <ol class="list-[lower-alpha] list-inside ml-6 mt-2 space-y-1 text-gray-600">
+                        <li>Arquitectura del sistema</li>
+                    </ol>
+                </li>
+                <li>Esquema de datos</li>
+                <li>Control de acceso y roles</li>
+                <li>Tratamiento de medios y comunicaciones</li>
+                <li>Pruebas y entorno de ejecución</li>
+                <li>Reflexión final, obstáculos y líneas de evolución</li>
+            </ol>
+        </div>
+
+    </div>
+
+    <div class="a4-page">
+        <br>
+        <h1>1. Presentación del Proyecto</h1>
+        <br>
+
+        <p>Academiaprofesional es una plataforma web orientada a la formación y gestión educativa online. No está
+            planteada como un simple repositorio de archivos o un blog de cursos, sino como un entorno integral centrado
+            en un problema concreto: romper las barreras geográficas y económicas de la educación presencial a través de
+            la digitalización y la interacción directa.</p>
+
+        <p>La aplicación permite trabajar de forma conjunta a estudiantes, profesores y administradores. Cada rol cuenta
+            con su propio panel y funciones específicas, lo que transforma la experiencia en un sistema educativo
+            completo. La web no solo aloja material didáctico en formato multimedia, sino que integra la gestión de
+            pagos, suscripciones y el acceso a clases, permitiendo un seguimiento personalizado del aprendizaje.</p>
+        <figure class="my-6 break-inside-avoid">
+            <img src="./capturas/portal.png" alt="Página principal o landing page del portal web de la Academia."
+                class="w-full h-auto border border-gray-300 rounded shadow-md mb-2">
+            <figcaption class="text-sm text-center text-gray-600 mt-2">Página principal o landing page del portal web de
+                la Academia.</figcaption>
+        </figure>
+
+        <p>El objetivo principal es unificar en un solo espacio la teoría, la práctica y la comunicación, eliminando la
+            dispersión de herramientas que suelen sufrir los entornos de aprendizaje virtuales (correos, hojas de
+            cálculo, y aplicaciones externas de vídeo).</p>
+
+    </div>
+
+    <div class="a4-page">
+        <figure class="my-6 break-inside-avoid">
+            <img src="./capturas/Elegir catalogo.png" alt="Pantalla de selección del tipo de formación deseada."
+                class="w-full h-auto border border-gray-300 rounded shadow-md mb-2">
+            <figcaption class="text-sm text-center text-gray-600 mt-2">Pantalla de selección del tipo de formación
+                deseada.</figcaption>
+        </figure>
+
+        <br>
+        <h2>1.1 Contexto y motivación inicial</h2>
+        <br>
+
+        <p>La idea nace de una barrera económica y logística real que afecta a un gran número de estudiantes: la
+            obligación del desplazamiento y la presencialidad. En muchos casos, el acceso a academias, centros de
+            formación o clases particulares requiere constantes viajes que no todos los alumnos pueden permitirse, ya
+            sea por el coste financiero del transporte, por falta de tiempo o por limitaciones de movilidad.</p>
+
+        <p>Por otro lado, cuando un educador independiente decide digitalizar su contenido, suele enfrentarse a un
+            ecosistema tecnológico muy fragmentado. A menudo, el profesor se ve obligado a alojar sus cursos en
+            plataformas masivas que restan visibilidad a su marca y cobran altas comisiones, mientras que debe gestionar
+            los accesos a clases en directo o pagos externos a través de interminables cadenas de correos o herramientas
+            separadas. Para el docente, no disponer de una plataforma propia significa perder el control directo sobre
+            la experiencia de sus estudiantes y sus ingresos, convirtiendo la organización de la academia en una carga
+            administrativa pesada y poco profesional.</p>
+
+    </div>
+
+    <div class="a4-page">
+        <p>A partir de ese problema surge Academiaprofesional: una herramienta que no sustituye al profesor, pero sí le
+            ayuda a centralizar información, automatizar los cobros y reducir su trabajo manual de gestión.</p>
+
+        <br>
+
+        <h2>1.2 Audiencia objetivo</h2>
+
+        <br>
+
+        <p>El público objetivo de la plataforma está formado por todos los perfiles que intervienen en un proceso
+            formativo. La aplicación se ha diseñado pensando en que cada usuario vea solo lo que necesita y pueda
+            realizar sus tareas de forma sencilla y sin fricción técnica.</p>
+
+        <table class="table-custom">
+            <thead>
+                <tr>
+                    <th>Perfil</th>
+                    <th>Necesidad que cubre</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Estudiante</strong></td>
+                    <td>Buscar cursos, registrarse, realizar el pago seguro y consumir las lecciones o clases
+                        interactivas.</td>
+                </tr>
+                <tr>
+                    <td><strong>Profesor</strong></td>
+                    <td>Crear cursos, subir material (vídeos, recursos), revisar sus alumnos matriculados y gestionar
+                        calificaciones.</td>
+                </tr>
+                <tr>
+                    <td><strong>Administrador</strong></td>
+                    <td>Validar profesores, moderar cursos publicados, controlar la plataforma y supervisar el volumen
+                        de transacciones.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>Esta división por roles es vital porque el problema no afecta solo al alumno que necesita aprender. También
+            afecta al profesor que necesita vender su conocimiento de forma organizada y segura sin lidiar con
+            infraestructura técnica.</p>
+
+    </div>
+
+    <div class="a4-page">
+        <br>
+        <h2>1.3 Metas funcionales y de diseño</h2>
+        <br>
+
+        <h3>Objetivos funcionales</h3>
+
+        <ul>
+            <li>Permitir que los estudiantes busquen y se inscriban en cursos.</li>
+            <li>Gestionar el proceso de pago de forma segura y automatizada.</li>
+            <li>Proporcionar herramientas al profesorado para la creación de lecciones en vídeo y clases
+                presenciales/híbridas (<code>is_classroom</code>).</li>
+            <li>Facilitar el seguimiento del alumnado a través del registro de inscripciones (<code>enrollments</code>).
+            </li>
+            <li>Centralizar documentos, vídeos y recursos en la nube.</li>
+        </ul>
+
+        <h3>Objetivos visuales</h3>
+
+        <ul>
+            <li>Crear una interfaz limpia, moderna y enfocada en el aprendizaje sin distracciones.</li>
+            <li>Usar paneles separados (Dashboards) para que cada usuario tenga su espacio ordenado.</li>
+            <li>Mantener una reproducción de vídeo y navegación fluida tipo SPA (Single Page Application).</li>
+        </ul>
+        <br>
+        <h1>2. Planificación y cronograma</h1>
+        <br>
+
+        <p>La planificación inicial se centró en definir qué roles existirían y qué podía hacer cada uno. Era importante
+            no empezar directamente por las pantallas, porque el proyecto tiene partes intrínsecamente conectadas:
+            alumnos matriculados, pagos realizados y contenido multimedia bloqueado hasta la verificación del pago.</p>
+
+        <table class="table-custom">
+            <thead>
+                <tr>
+                    <th>Fase</th>
+                    <th>Decisión tomada</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Roles</strong></td>
+                    <td>Separar lógica y permisos de Estudiante, Profesor y Administrador.</td>
+                </tr>
+                <tr>
+                    <td><strong>Oferta de cursos</strong></td>
+                    <td>Permitir clases híbridas (con contraseña) y cursos grabados en vídeo.</td>
+                </tr>
+                <tr>
+                    <td><strong>Inscripciones</strong></td>
+                    <td>Automatizar la creación de la inscripción una vez se valida el <em>Payment</em>.</td>
+                </tr>
+                <tr>
+                    <td><strong>Archivos</strong></td>
+                    <td>Gestionar imágenes y vídeos mediante Spatie MediaLibrary para optimización.</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="a4-page">
+        <p>A nivel organizativo, el proyecto se definió para un desarrollo de aproximadamente <strong>200 horas de
+                trabajo</strong> distribuidas a lo largo de varios meses. Al tratarse de un proyecto anterior a toda
+            fase comercial, se priorizó la robustez de la base de datos y la fluidez del framework frontend antes que un
+            despliegue masivo comercial.</p>
+
+        <div class="mermaid">
+            %%{init: { 'gantt': { 'barHeight': 25, 'leftPadding': 120, 'fontSize': 11 } } }%%
+            gantt
+            title Planificación del TFG: Academia (Dic 2025 - Jun 2026)
+            dateFormat YYYY-MM-DD
+            axisFormat %b
+
+            section Análisis
+            Requisitos y BD :a1, 2025-12-01, 20d
+            Prototipado UI/UX :a2, 2025-12-21, 20d
+
+            section Backend
+            Desarrollo Laravel :b1, 2026-01-10, 30d
+            Lógica de Roles/API :b2, 2026-02-09, 30d
+
+            section Frontend
+            Desarrollo SPA (Vue) :c1, 2026-03-11, 40d
+            Integración Pagos :c2, 2026-04-20, 20d
+
+            section Cierre
+            Testing Local :d1, 2026-05-10, 10d
+            Documentación TFG :d2, 2026-05-20, 12d
+        </div>
+
+        <p>El coste de desarrollo estimado (200 horas a tarifa junior de 20€/hora) sitúa el valor tecnológico inicial
+            del proyecto en torno a los 4.000€, asumiendo un despliegue local o en servidor educativo.</p>
+
+        <br>
+        <h1>3. Problemática actual y solución aportada</h1>
+        <br>
+
+        <p>Hoy en día existen gigantes del e-learning (como Udemy o Domestika), pero muchos son demasiado impersonales.
+            Para un alumno que busca un refuerzo real o contacto directo, comprar un curso genérico y no poder
+            interactuar con el profesor resulta frustrante.</p>
+
+        <p>La alternativa tradicional es que el profesor utilice plataformas de videollamadas genéricas y pida
+            transferencias por Bizum o banco. Academiaprofesional intenta cubrir el espacio intermedio: una herramienta
+            específica para creadores donde pueden tener sus vídeos organizados, pero manteniendo el control de sus
+            alumnos y cobros sin intermediarios confusos.</p>
+
+    </div>
+
+    <div class="a4-page">
+        <table class="table-custom">
+            <thead>
+                <tr>
+                    <th>Opción</th>
+                    <th>Problema</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Plataformas masivas</strong></td>
+                    <td>Sin interacción directa, alta tasa de abandono y comisiones abusivas para el creador.</td>
+                </tr>
+                <tr>
+                    <td><strong>Clases físicas</strong></td>
+                    <td>Costes de desplazamiento, limitación geográfica e incompatibilidad horaria.</td>
+                </tr>
+                <tr>
+                    <td><strong>Videollamadas genéricas</strong></td>
+                    <td>Caos organizativo (pagos por un lado, enlaces perdidos por correo, recursos dispersos).</td>
+                </tr>
+                <tr>
+                    <td><strong>Academiaprofesional</strong></td>
+                    <td>Centraliza los pagos, el temario en vídeo y el control de matriculados en un único flujo
+                        ordenado.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <br>
+        <h1>4. Flujo de navegación y estructura general</h1>
+        <br>
+
+        <p>El funcionamiento general se basa en un flujo sencillo. El usuario visitante revisa el catálogo. Tras crear
+            una cuenta (registrándose como estudiante), puede comprar un curso mediante una pasarela. El sistema procesa
+            el pago y genera su inscripción. A partir de ahí, consume las lecciones en vídeo y, si el curso es
+            interactivo, accede a los datos de la sesión en directo (<code>classroom_pass_code</code>).</p>
+
+    </div>
+
+    <div class="a4-page">
+        <figure class="my-6 break-inside-avoid">
+            <img src="./capturas/pasarela inicio sesion.png"
+                alt="Interfaz unificada de inicio de sesión y registro de usuarios."
+                class="w-full h-auto border border-gray-300 rounded shadow-md mb-2">
+            <figcaption class="text-sm text-center text-gray-600 mt-2">Interfaz unificada de inicio de sesión y registro
+                de usuarios.</figcaption>
+        </figure>
+
+        <table class="table-custom">
+            <thead>
+                <tr>
+                    <th>Rol</th>
+                    <th>Flujo principal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Estudiante</strong></td>
+                    <td>Registro, exploración de catálogo, pago seguro, visualización de lecciones.</td>
+                </tr>
+                <tr>
+                    <td><strong>Profesor</strong></td>
+                    <td>Creación de cursos, subida de vídeos, revisión de inscritos y gestión de calificaciones.</td>
+                </tr>
+                <tr>
+                    <td><strong>Administrador</strong></td>
+                    <td>Moderación global, control de transacciones y administración de permisos de usuarios.</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="a4-page">
+        <br>
+        <h1>5. Módulos y características principales</h1>
+
+        <br>
+
+        <h2>5.1 Perfil de Alumno</h2>
+        <br>
+
+        <p>El estudiante dispone de un flujo donde puede completar sus datos básicos y gestionar su aprendizaje. La
+            plataforma le permite tener una vista clara de sus cursos adquiridos, continuar lecciones donde las dejó y
+            revisar pagos.</p>
+
+        <figure class="my-6 break-inside-avoid">
+            <img src="./capturas/panel de control usuario comun.png"
+                alt="Panel de control básico o perfil de un estudiante al registrarse."
+                class="w-full h-auto border border-gray-300 rounded shadow-md mb-2">
+            <figcaption class="text-sm text-center text-gray-600 mt-2">Panel de control básico o perfil de un estudiante
+                al registrarse.</figcaption>
+        </figure>
+
+    </div>
+
+    <div class="a4-page">
+        <figure class="my-6 break-inside-avoid">
+            <img src="./capturas/pago exitoso y ventana de mis cursos.png"
+                alt="Vista de los cursos en los que el alumno está inscrito tras procesarse el pago."
+                class="w-full h-auto border border-gray-300 rounded shadow-md mb-2">
+            <figcaption class="text-sm text-center text-gray-600 mt-2">Vista de los cursos en los que el alumno está
+                inscrito tras procesarse el pago.</figcaption>
+        </figure>
+
+        <figure class="my-6 break-inside-avoid">
+            <img src="./capturas/catalogo escolar.png" alt="Catálogo Escolar"
+                class="w-full h-auto border border-gray-300 rounded shadow-md mb-2">
+            <figcaption class="text-sm text-center text-gray-600 mt-2">Explorador del catálogo escolar.</figcaption>
+        </figure>
+
+    </div>
+
+    <div class="a4-page">
+        <figure class="my-6 break-inside-avoid">
+            <img src="./capturas/catalogo profesional.png" alt="Catálogo Profesional"
+                class="w-full h-auto border border-gray-300 rounded shadow-md mb-2">
+            <figcaption class="text-sm text-center text-gray-600 mt-2">Explorador del catálogo profesional.</figcaption>
+        </figure>
+
+        <figure class="my-6 break-inside-avoid">
+            <img src="./capturas/verificacion inscripcion curso.png"
+                alt="Proceso de verificación y pago antes de formalizar la inscripción en un curso."
+                class="w-full h-auto border border-gray-300 rounded shadow-md mb-2">
+            <figcaption class="text-sm text-center text-gray-600 mt-2">Proceso de verificación y pago antes de
+                formalizar la inscripción en un curso.</figcaption>
+        </figure>
+
+    </div>
+
+    <div class="a4-page">
+        <figure class="my-6 break-inside-avoid">
+            <img src="./capturas/progreso del curso.png"
+                alt="Interfaz de seguimiento del progreso dentro del reproductor de lecciones."
+                class="w-full h-auto border border-gray-300 rounded shadow-md mb-2">
+            <figcaption class="text-sm text-center text-gray-600 mt-2">Interfaz de seguimiento del progreso dentro del
+                reproductor de lecciones.</figcaption>
+        </figure>
+
+        <br>
+        <h2>5.2 Perfil de Docente</h2>
+        <br>
+
+        <p>El profesorado tiene un panel propio desde el que gestionar su conocimiento. Para poder enseñar, pueden
+            publicar nuevos cursos definiendo título, precio, descripción y modalidad.</p>
+
+    </div>
+
+    <div class="a4-page">
+        <figure class="my-6 break-inside-avoid">
+            <img src="./capturas/vista mis cursos usuario profesor.png"
+                alt="Panel donde el profesor puede consultar los cursos que ha impartido o publicado."
+                class="w-full h-auto border border-gray-300 rounded shadow-md mb-2">
+            <figcaption class="text-sm text-center text-gray-600 mt-2">Panel donde el profesor puede consultar los
+                cursos que ha impartido o publicado.</figcaption>
+        </figure>
+
+        <figure class="my-6 break-inside-avoid">
+            <img src="./capturas/modo edicion de curso como profesor.png"
+                alt="Herramientas de edición para configurar los parámetros de un nuevo curso."
+                class="w-full h-auto border border-gray-300 rounded shadow-md mb-2">
+            <figcaption class="text-sm text-center text-gray-600 mt-2">Herramientas de edición para configurar los
+                parámetros de un nuevo curso.</figcaption>
+        </figure>
+
+    </div>
+
+    <div class="a4-page">
+        <figure class="my-6 break-inside-avoid">
+            <img src="./capturas/modo vista previa profesor curso.png"
+                alt="Vista previa desde el rol del docente comprobando el material subido."
+                class="w-full h-auto border border-gray-300 rounded shadow-md mb-2">
+            <figcaption class="text-sm text-center text-gray-600 mt-2">Vista previa desde el rol del docente comprobando
+                el material subido.</figcaption>
+        </figure>
+
+        <figure class="my-6 break-inside-avoid">
+            <img src="./capturas/lista profesores.png"
+                alt="Listado general de educadores o miembros involucrados en el proyecto."
+                class="w-full h-auto border border-gray-300 rounded shadow-md mb-2">
+            <figcaption class="text-sm text-center text-gray-600 mt-2">Listado general de educadores o miembros
+                involucrados en el proyecto.</figcaption>
+        </figure>
+
+    </div>
+
+    <div class="a4-page">
+        <br>
+        <h2>5.3 Panel de Gestión y Control</h2>
+        <br>
+
+        <p>El administrador posee una visión global del sistema. Controla que el flujo financiero sea correcto y que no
+            haya usuarios saltándose las normas de la comunidad.</p>
+
+        <figure class="my-6 break-inside-avoid">
+            <img src="./capturas/vista admin de gestion de estudiantes.png"
+                alt="Panel de administración mostrando la gestión y control de estudiantes."
+                class="w-full h-auto border border-gray-300 rounded shadow-md mb-2">
+            <figcaption class="text-sm text-center text-gray-600 mt-2">Panel de administración mostrando la gestión y
+                control de estudiantes.</figcaption>
+        </figure>
+
+        <figure class="my-6 break-inside-avoid">
+            <img src="./capturas/vista de gestion cursos admin.png"
+                alt="Panel de administración para la gestión global y revisión de cursos de la plataforma."
+                class="w-full h-auto border border-gray-300 rounded shadow-md mb-2">
+            <figcaption class="text-sm text-center text-gray-600 mt-2">Panel de administración para la gestión global y
+                revisión de cursos de la plataforma.</figcaption>
+        </figure>
+
+    </div>
+
+    <div class="a4-page">
+
+        <br>
+        <h1>6. Stack Tecnológico</h1>
+        <br>
+
+        <p>La aplicación se ha desarrollado utilizando un stack web moderno y robusto enfocado en la agilidad de
+            desarrollo y el rendimiento en el navegador.</p>
+
+        <table class="table-custom">
+            <thead>
+                <tr>
+                    <th>Tecnología</th>
+                    <th>Uso en el proyecto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Laravel 12 (PHP)</strong></td>
+                    <td>Backend, Rutas, Controladores, ORM (Eloquent) y lógica de negocio principal.</td>
+                </tr>
+                <tr>
+                    <td><strong>Vue 3 (JS)</strong></td>
+                    <td>Componentes de interfaz interactivos y reactivos en el lado del cliente.</td>
+                </tr>
+                <tr>
+                    <td><strong>Inertia.js</strong></td>
+                    <td>Conecta Laravel con Vue. Permite desarrollar una SPA sin necesidad de programar una API externa
+                        separada.</td>
+                </tr>
+                <tr>
+                    <td><strong>Tailwind CSS v4</strong></td>
+                    <td>Diseño visual, estilos de paneles, formularios y tipografías (vía Vite).</td>
+                </tr>
+                <tr>
+                    <td><strong>Spatie Permissions</strong></td>
+                    <td>Gestión del sistema de roles (Admin, Teacher, Student) en la base de datos.</td>
+                </tr>
+                <tr>
+                    <td><strong>Cashier / Paddle</strong></td>
+                    <td>Librerías para procesar de forma segura los pagos e inscripciones.</td>
+                </tr>
+                <tr>
+                    <td><strong>Spatie MediaLibrary</strong></td>
+                    <td>Gestión limpia y polimórfica de subida de imágenes, avatares y archivos de vídeo.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <br>
+        <h2>6.1 Arquitectura del sistema</h2>
+        <br>
+
+        <p>La estructura respeta el estándar MVC (Modelo-Vista-Controlador) de Laravel, delegando las Vistas a Vue.js.
+            Esta separación de responsabilidades mantiene el proyecto ordenado y profesional.</p>
+
+    </div>
+
+    <div class="a4-page">
+
+        <table class="table-custom">
+            <thead>
+                <tr>
+                    <th>Carpeta</th>
+                    <th>Responsabilidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>app/Models/</code></td>
+                    <td>Modelos de Eloquent y lógica de relaciones de base de datos.</td>
+                </tr>
+                <tr>
+                    <td><code>app/Http/Controllers/</code></td>
+                    <td>Controladores que validan peticiones y envían datos a Vue vía Inertia.</td>
+                </tr>
+                <tr>
+                    <td><code>database/migrations/</code></td>
+                    <td>Estructura y creación de tablas de PostgreSQL/MySQL mediante código.</td>
+                </tr>
+                <tr>
+                    <td><code>resources/js/Pages/</code></td>
+                    <td>Componentes de página de Vue 3 que el usuario visualiza en su navegador.</td>
+                </tr>
+                <tr>
+                    <td><code>routes/web.php</code></td>
+                    <td>Definición de todas las rutas y middleware de seguridad.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <br>
+        <h1>7. Esquema de datos</h1>
+        <br>
+
+        <p>La base de datos relacional es el corazón del proyecto. Se ha estructurado utilizando las convenciones de
+            Eloquent para controlar la lógica sin escribir SQL bruto, garantizando la escalabilidad.</p>
+
+        <table class="table-custom">
+            <thead>
+                <tr>
+                    <th>Grupo</th>
+                    <th>Tablas principales y función</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Usuarios</strong></td>
+                    <td><code>users</code>, <code>students</code>, <code>teachers</code>. Filtran el acceso según el
+                        rol.</td>
+                </tr>
+                <tr>
+                    <td><strong>Contenido</strong></td>
+                    <td><code>courses</code> (información del curso) y <code>lessons</code> (los vídeos/temarios del
+                        curso).</td>
+                </tr>
+                <tr>
+                    <td><strong>Matriculaciones</strong></td>
+                    <td><code>enrollments</code> (Tabla pivote enriquecida que une alumnos con cursos y guarda su nota).
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Finanzas</strong></td>
+                    <td><code>payments</code> (Transacciones monetarias vinculadas a Stripe/PayPal).</td>
+                </tr>
+                <tr>
+                    <td><strong>Archivos</strong></td>
+                    <td><code>media</code> (Tabla polimórfica que maneja todos los ficheros multimedia).</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="a4-page">
+        <p>El uso de la tabla <code>enrollments</code> es crucial, ya que permite que un alumno tenga múltiples cursos,
+            y que el profesor sepa exactamente cuándo se apuntó cada estudiante y cuál fue su calificación final
+            (<code>final_grade</code>).</p>
+
+        <div class="mermaid">
+            erDiagram
+            USER ||--o| TEACHER : "hasOne"
+            USER ||--o| STUDENT : "hasOne"
+
+            TEACHER ||--o{ COURSE : "hasMany"
+
+            COURSE ||--o{ LESSON : "hasMany"
+            COURSE ||--o{ ENROLLMENT : "hasMany"
+
+            STUDENT ||--o{ ENROLLMENT : "hasMany"
+            STUDENT ||--o{ PAYMENT : "hasMany"
+
+            COURSE ||--o{ PAYMENT : "hasMany"
+            ENROLLMENT ||--|| PAYMENT : "hasOne"
+        </div>
+
+    </div>
+
+    <div class="a4-page">
+        <br>
+        <h1>8. Control de acceso y roles</h1>
+        <br>
+
+        <p>La plataforma asegura los datos a través del sistema de <em>Middlewares</em> de Laravel y la librería Spatie.
+            Se impide estrictamente que un Estudiante visite el panel de creación de cursos de un Profesor, o que un
+            Profesor vea la contabilidad global que pertenece al Administrador.</p>
+
+        <p>Además, al usar Inertia.js, las rutas protegidas no entregan ni siquiera la vista (HTML/JS) si el servidor
+            deniega el acceso, protegiendo tanto la lógica como la interfaz de miradas no autorizadas. Los pagos
+            transaccionan por protocolos cifrados SSL obligatorios.</p>
+
+        <br>
+        <h1>9. Tratamiento de medios y comunicaciones</h1>
+        <br>
+
+        <p>Al estar desarrollada con Inertia y Vue, las operaciones se implementan devolviendo objetos JSON de manera
+            casi transparente al programador, sin requerir una API REST externa compleja. Sin embargo, para la gestión
+            de medios (avatares y vídeos), se apoyó en <code>spatie/medialibrary</code>, que automatiza el guardado de
+            los archivos en el disco local o nube, y proporciona URLs de acceso rápido a los modelos de base de datos.
+        </p>
+
+        <br>
+        <h1>10. Pruebas y entorno de ejecución</h1>
+        <br>
+
+        <table class="table-custom">
+            <thead>
+                <tr>
+                    <th>Prueba / Comando</th>
+                    <th>Resultado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>composer install</code></td>
+                    <td>Dependencias de PHP instaladas correctamente.</td>
+                </tr>
+                <tr>
+                    <td><code>npm install</code></td>
+                    <td>Librerías de Vue y Tailwind listas para compilar.</td>
+                </tr>
+                <tr>
+                    <td><code>php artisan migrate</code></td>
+                    <td>Generación exitosa del esquema de base de datos.</td>
+                </tr>
+                <tr>
+                    <td><code>npm run dev</code></td>
+                    <td>Vite compila el frontend rápidamente en modo local.</td>
+                </tr>
+                <tr>
+                    <td>Petición Web Local</td>
+                    <td>Respuesta HTTP 200 OK y carga fluida de la Single Page Application.</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="a4-page">
+        <p>El despliegue del proyecto se ha evaluado en entornos controlados y locales, confirmando la solidez de la
+            instalación y ejecución de dependencias.</p>
+
+        <p><strong>Propuesta de despliegue futuro:</strong> Para llevarlo a producción, la arquitectura está preparada
+            para integrarse en servicios VPS sencillos mediante Laravel Forge, o plataformas de alta disponibilidad. La
+            base de datos operaría idealmente en un servicio gestionado para evitar pérdidas de información financiera.
+        </p>
+
+        <br>
+        <h1>11. Reflexión final, obstáculos y líneas de evolución</h1>
+        <br>
+
+        <p>Academiaprofesional resuelve un problema real: monetizar y acceder a educación de calidad eliminando
+            intermediarios físicos o plataformas que restan margen y contacto humano. El proyecto ha demostrado cómo
+            unir herramientas sólidas (Laravel) con la velocidad del cliente (Vue) produce software altamente escalable.
+        </p>
+
+        <h3>Dificultades encontradas</h3>
+
+        <ul>
+            <li>Comprender e integrar el flujo asíncrono de las pasarelas de pago (Stripe/PayPal), asegurándose de que
+                una caída de red no generase un cobro sin su correspondiente inscripción.</li>
+            <li>Configurar Inertia.js correctamente para evitar pérdida de estado de los componentes Vue durante la
+                navegación.</li>
+            <li>Diseñar permisos de bases de datos que permitieran al profesor editar <em>solo</em> sus propios cursos,
+                sin interferir en los del resto.</li>
+        </ul>
+
+        <h3>Mejoras futuras</h3>
+
+        <p>Dado que el proyecto se ha desarrollado como TFG, queda una amplia base de recorrido y escalabilidad:</p>
+
+        <ul>
+            <li><strong>Videollamadas nativas:</strong> Por el momento la plataforma se encarga únicamente de la
+                programación y gestión de accesos (mediante el <code>classroom_pass_code</code>), realizando las
+                sesiones a través de herramientas externas como Google Meet o Zoom. En el futuro, la intención es
+                implementar WebRTC nativo (ej. Twilio) para impartir las clases síncronas directamente sin necesidad de
+                salir de la pestaña del navegador.</li>
+            <li><strong>Facturación automática en PDF:</strong> Integrar generación asíncrona de facturas legales por
+                cada <code>Payment</code> usando colas de trabajos (Queues) de Laravel.</li>
+            <li><strong>Asistente IA:</strong> Implantar un chat de inteligencia artificial que asista a los alumnos en
+                base al texto de las lecciones publicadas por el docente.</li>
+        </ul>
+
+        <p>En conclusión, el proyecto no busca sustituir la enseñanza presencial, sino dotar a educadores independientes
+            y alumnos de un entorno ordenado, profesional y seguro que multiplique sus oportunidades.</p>
+
+    </div>
+
+</body>
+
+</html>
